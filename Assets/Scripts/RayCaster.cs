@@ -67,6 +67,7 @@ namespace AE
             {
                 hitObject = hitInfo.collider.gameObject;
                 displayingPopUp = true;
+                Debug.Log($"{hitObject}");
             }
             else
             {
