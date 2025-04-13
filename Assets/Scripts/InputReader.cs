@@ -35,15 +35,8 @@ namespace AE
         {
             throw new System.NotImplementedException();
         }
-        bool IsDeviceMouse(InputAction.CallbackContext context)
-        {
-            throw new System.NotImplementedException();
-        }
-        void IPlayerActions.OnMouseControlCamera(InputAction.CallbackContext context)
-        {
-            throw new System.NotImplementedException();
-        }
-        void IPlayerActions.OnFire(InputAction.CallbackContext context) //interaction
+
+        void IPlayerActions.OnInteract(InputAction.CallbackContext context) 
         {
             if (context.phase == InputActionPhase.Performed)
             {
@@ -54,15 +47,7 @@ namespace AE
         {
             Move.Invoke(arg0: context.ReadValue<Vector2>());
         }
-        void IPlayerActions.OnJump(InputAction.CallbackContext context)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        void IPlayerActions.OnRun(InputAction.CallbackContext context)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
 
