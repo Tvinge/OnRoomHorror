@@ -42,31 +42,25 @@ namespace AE
         }
         private void Update()
         {
-            origin = freeLookVCam.transform.position;
-            direction = freeLookVCam.transform.TransformDirection(Vector3.forward) * maxDistance;
-
             HandleHiting();
             Disp();
-            Debug.DrawRay(origin, direction, Color.red);
             if (IsLookingAtInteractable == true)
             {
                 Debug.Log($"Looking at {hitObject.name}"); //Debug
             }
-
         }
 
         void HandleHiting()
         {
-            Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-            //Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.blue, 0.1f);
+            origin = mainCamera.transform.position;
+            direction = freeLookVCam.transform.TransformDirection(Vector3.forward) * maxDistance;
+            Debug.DrawRay(origin, direction * maxDistance, Color.blue, 0.1f);
 
-            IsLookingAtInteractable = Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance);
-
-            //IsLookingAtInteractable = Physics.Raycast(
-            //    origin: origin,
-            //    direction: direction,
-            //    hitInfo: out RaycastHit hitInfo,
-            //    maxDistance: 100);
+            IsLookingAtInteractable = Physics.Raycast(
+                origin: origin,
+                direction: direction,
+                hitInfo: out RaycastHit hitInfo,
+                maxDistance: 100);
 
             if (hitInfo.collider.CompareTag(interactable) == true)
             {
