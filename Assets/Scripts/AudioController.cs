@@ -1,5 +1,6 @@
 using AE;
 using KBCore.Refs;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -11,8 +12,9 @@ public class AudioController : MonoBehaviour
     [SerializeField, Anywhere] GroundChecker groundChecker;
     [SerializeField, Anywhere] PlayerController playerController;
     [SerializeField, Anywhere] AudioSource ambientAudio;
-    AudioSource playerFootSteps;
-
+    [SerializeField, Anywhere] AudioSource playerFootSteps;
+    [SerializeField, Anywhere] AudioClip doorOpenAudio;
+    [SerializeField, Anywhere] AudioSource doorOpenAudioSource;
 
     [Header("Settings")]
     [SerializeField] float footStepStartPoint = 0.5f;
@@ -26,7 +28,7 @@ public class AudioController : MonoBehaviour
     }
     private void Start()
     {
-        playerFootSteps = playerController.GetComponent<AudioSource>(); 
+        //playerFootSteps = playerController.GetComponent<AudioSource>(); 
         ambientAudio.Play();
     }
     private void Update()
@@ -46,16 +48,21 @@ public class AudioController : MonoBehaviour
         playerFootSteps.Play();
     }
 
-
-    void OnMove(Vector2 a) //needed to be called twice 2 work
+    public void PlayOpeningDoorSound()
     {
-        if (playerController.IsMoving && !playerFootSteps.isPlaying)
-        {
-            playerFootSteps.Play();
-        }
-        else if (playerFootSteps.isPlaying)
-        {
-            playerFootSteps.Stop();
-        }
+        doorOpenAudioSource.PlayOneShot(doorOpenAudio);
     }
+
+
+    //void OnMove(Vector2 a) //needed to be called twice 2 work
+    //{
+    //    if (playerController.IsMoving && !playerFootSteps.isPlaying)
+    //    {
+    //        playerFootSteps.Play();
+    //    }
+    //    else if (playerFootSteps.isPlaying)
+    //    {
+    //        playerFootSteps.Stop();
+    //    }
+    //}
 }

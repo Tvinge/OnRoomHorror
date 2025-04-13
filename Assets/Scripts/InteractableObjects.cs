@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace AE
 {
@@ -11,44 +12,72 @@ namespace AE
             public string name;
             public string defaultDescription;
             public string conditionDescription;
-            public bool conditionMet;
+            public bool hasLight = false;
+            public bool canPressurePlate;
+
             public string description
             {
-                get
-                {
-                    return conditionMet ? conditionDescription : defaultDescription;
-                }
+                get {return hasLight ? conditionDescription : defaultDescription;}
             }
         }
 
 
-        public ObjectData[] Objects;
+        public ObjectData[] objects;
+        public ObjectData[] heavyObjects;
 
         public ObjectData[]  InitializeObjects()
         {
             //add relevant objects in here, set their tags as interactable in the inspector
-            Objects = new ObjectData[]
+            objects = new ObjectData[]
             {
-                new ObjectData { name = "SD_Prop_Shield_Rusty_01", defaultDescription = "Description of Object1" },
-                new ObjectData { name = "SD_Prop_Sword_Rusty_01", defaultDescription = "Description of Object2" },
-                new ObjectData { name = "SD_Prop_Skull_Pile_01", defaultDescription = "Description of Object3" },
-                new ObjectData { name = "SD_Prop_Skull_Pile_02", defaultDescription = "Description of Object4 " },
-                new ObjectData { name = "SD_Prop_Corpse_01", defaultDescription = "dfasdf" },
-                new ObjectData { name = "SD_Prop_Corpse_04", defaultDescription = "Stabing knight in his chestplate? He must have comitted suicide, or get jumped on" },
+                new ObjectData { name = "SD_Prop_Shield_Rusty_01", defaultDescription = "I could use some light!", conditionDescription = "The knight should rest with his shield", canPressurePlate = true },
+                new ObjectData { name = "SD_Prop_Sword_Rusty_01", defaultDescription = "I could use some light!" , conditionDescription = "The knight should rest with his sword", canPressurePlate = true},
+                new ObjectData { name = "SD_Prop_Skull_Pile_01", defaultDescription = "I could use some light!", conditionDescription = "At least they have each other" },
+                new ObjectData { name = "SD_Prop_Skull_Pile_02", defaultDescription = "I could use some light!", conditionDescription = "At least they have each other" },
+                new ObjectData { name = "SD_Prop_Corpse_01", defaultDescription = "I could use some light!", conditionDescription = "Even if I move him, he will just turn to dust" },
+                new ObjectData { name = "SD_Prop_Corpse_04", defaultDescription = "I wander why he didn't leave", conditionDescription = "That armor must be heavy", canPressurePlate = true},
                 new ObjectData { name = "SD_Prop_CandleStand_01", defaultDescription = "I can use one of these", conditionDescription = "I already have one" },
                 new ObjectData { name = "SD_Prop_CandleStand_02", defaultDescription = "I can use one of these", conditionDescription = "I already have one" },
-                new ObjectData { name = "SD_Prop_Bench_Broken_01", defaultDescription = "ain't no sitting around here" }
+                new ObjectData { name = "SD_Env_StoneCircle_01", defaultDescription = "I could use some light!", conditionDescription = "It looks like a... pressure plate?" },
             };
-            return Objects;
+            return objects;
         }
 
-        public void SetCondition(string objectName, bool conditionMet)
+        //public void SetCondition(string objectName, bool conditionMet)
+        //{
+        //    var obj = System.Array.Find(Objects, o => o.name == objectName);
+        //    if (obj != null)
+        //    {
+        //        obj.conditionMet = conditionMet;
+        //    }
+        //}
+        public void SetLightCondition()
         {
-            var obj = System.Array.Find(Objects, o => o.name == objectName);
-            if (obj != null)
+            foreach (var obj in objects)
             {
-                obj.conditionMet = conditionMet;
+                obj.hasLight = true;
             }
+        }
+
+
+        public ObjectData[] GetHeavyObjects()
+        {
+            List<ObjectData> heavyObjectsList = new List<ObjectData>();
+            foreach (var obj in objects)
+            {
+                if (obj.canPressurePlate)
+                {
+                    heavyObjectsList.Add(new ObjectData
+                    {
+                        name = obj.name,
+                        defaultDescription = obj.defaultDescription,
+                        conditionDescription = obj.conditionDescription,
+                        hasLight = obj.hasLight,
+                        canPressurePlate = obj.canPressurePlate
+                    });
+                }
+            }
+            return heavyObjectsList.ToArray();
         }
     }
 }

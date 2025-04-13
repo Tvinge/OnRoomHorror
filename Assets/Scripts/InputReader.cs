@@ -41,15 +41,15 @@ namespace AE
         }
         void IPlayerActions.OnMouseControlCamera(InputAction.CallbackContext context)
         {
-            switch (context.phase)
-            {
-                case InputActionPhase.Started:
-                    EnableMouseControlCamera.Invoke();
-                    break;
-                case InputActionPhase.Canceled:
-                    DisableMouseControlCamera.Invoke();
-                    break;
-            }
+            //switch (context.phase)
+            //{
+            //    case InputActionPhase.Started:
+            //        EnableMouseControlCamera.Invoke();
+            //        break;
+            //    case InputActionPhase.Canceled:
+            //        DisableMouseControlCamera.Invoke();
+            //        break;
+            //}
         }
         void IPlayerActions.OnFire(InputAction.CallbackContext context) //interaction
         {
@@ -58,8 +58,6 @@ namespace AE
                 Interact.Invoke();
             }
         }
-
-
         void IPlayerActions.OnMove(InputAction.CallbackContext context)
         {
             Move.Invoke(arg0: context.ReadValue<Vector2>());

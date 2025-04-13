@@ -9,6 +9,7 @@ namespace AE
 {
     public class RayCaster : MonoBehaviour
     {
+
         public event UnityAction<GameObject> InteractionHappend = delegate { };
 
         [Header("References")]
@@ -19,13 +20,14 @@ namespace AE
         [SerializeField, Anywhere] InteractableObjects interactableObjects;
         [SerializeField, Anywhere] Interactions interactions;
 
-        InteractableObjects.ObjectData[] objects;
+        public InteractableObjects.ObjectData[] objects;
 
         [Header("Settings")]
         [SerializeField] float maxDistance = 100f;
         [SerializeField] float interactionDistance = 30f;
         [SerializeField] string defaultSentence = "Press F to interact with the object";
         [SerializeField] string interactable = "Interactable";
+        [SerializeField] string heavyObj = "heavyObj";
         [SerializeField] bool displayingPopUp = false;
 
         public bool IsLookingAtInteractable { get; private set; } = false;
@@ -44,10 +46,6 @@ namespace AE
         {
             HandleHiting();
             Disp();
-            if (IsLookingAtInteractable == true)
-            {
-                Debug.Log($"Looking at {hitObject.name}"); //Debug
-            }
         }
 
         void HandleHiting()
@@ -62,7 +60,7 @@ namespace AE
                 hitInfo: out RaycastHit hitInfo,
                 maxDistance: 100);
 
-            if (hitInfo.collider.CompareTag(interactable) == true)
+            if (hitInfo.collider.CompareTag(interactable) == true)// || hitInfo.collider.CompareTag(heavyObj) == true)
             {
                 hitObject = hitInfo.collider.gameObject;
                 displayingPopUp = true;
@@ -88,9 +86,8 @@ namespace AE
         }
         void OnInteract()
         {
-            if (IsLookingAtInteractable)
+            if (IsLookingAtInteractable && hitObject.name != null)
             {
-                Debug.Log("Interact action performed.");
                 var interactableObject = objects.FirstOrDefault(obj => obj.name == $"{hitObject.name}");
                 interactionPopUp.text = interactableObject?.description;
                 displayingPopUp = true;

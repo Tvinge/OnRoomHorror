@@ -26,7 +26,7 @@ namespace AE
         //    input.EnableMouseControlCamera += OnEnableMouseControlCamera;
         //    input.DisableMouseControlCamera += OnDisableMouseControlCamera;
         //}
-        //void OnDisable()
+        //void OnDisable() 
         //{
         //    input.Look -= OnLook;
         //    input.EnableMouseControlCamera -= OnEnableMouseControlCamera;
