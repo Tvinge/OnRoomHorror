@@ -33,23 +33,15 @@ namespace AE
 
         void IPlayerActions.OnLook(InputAction.CallbackContext context)
         {
-            Look.Invoke(arg0: context.ReadValue<Vector2>(), IsDeviceMouse(context));
+            throw new System.NotImplementedException();
         }
         bool IsDeviceMouse(InputAction.CallbackContext context)
         {
-            return context.control.device.name == "Mouse";
+            throw new System.NotImplementedException();
         }
         void IPlayerActions.OnMouseControlCamera(InputAction.CallbackContext context)
         {
-            //switch (context.phase)
-            //{
-            //    case InputActionPhase.Started:
-            //        EnableMouseControlCamera.Invoke();
-            //        break;
-            //    case InputActionPhase.Canceled:
-            //        DisableMouseControlCamera.Invoke();
-            //        break;
-            //}
+            throw new System.NotImplementedException();
         }
         void IPlayerActions.OnFire(InputAction.CallbackContext context) //interaction
         {
@@ -62,9 +54,6 @@ namespace AE
         {
             Move.Invoke(arg0: context.ReadValue<Vector2>());
         }
-
-
-
         void IPlayerActions.OnJump(InputAction.CallbackContext context)
         {
             throw new System.NotImplementedException();

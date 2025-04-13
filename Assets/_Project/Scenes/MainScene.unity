@@ -26397,6 +26397,8 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 99e6aa0e6c009fe43be6bcd18391b76f, type: 2}
   freeLookVCam: {fileID: 1394614763}
   speedMultiplayer: 1
+  isRMBPressed: 0
+  cameraMovementLock: 0
 --- !u!114 &668158197
 MonoBehaviour:
   m_ObjectHideFlags: 0
