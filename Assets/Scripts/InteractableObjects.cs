@@ -42,15 +42,6 @@ namespace AE
             };
             return objects;
         }
-
-        //public void SetCondition(string objectName, bool conditionMet)
-        //{
-        //    var obj = System.Array.Find(Objects, o => o.name == objectName);
-        //    if (obj != null)
-        //    {
-        //        obj.conditionMet = conditionMet;
-        //    }
-        //}
         public void SetLightCondition()
         {
             foreach (var obj in objects)
@@ -58,8 +49,6 @@ namespace AE
                 obj.hasLight = true;
             }
         }
-
-
         public ObjectData[] GetHeavyObjects()
         {
             List<ObjectData> heavyObjectsList = new List<ObjectData>();

@@ -14,7 +14,7 @@ namespace AE
         [SerializeField, Anywhere] GameObject directionalLight;
         [SerializeField] GameObject door;
         [SerializeField] GameObject doorWall;
-
+        [SerializeField, Anywhere] GameObject endGameText;
 
         bool firstTimeCandleInteraction = true;
 
@@ -22,6 +22,12 @@ namespace AE
         {
             rayCaster.InteractionHappend += OnInteract;
             pressurePlate.OnPressurePlate += OnPressurePlate;
+
+            door.SetActive(true);
+            doorWall.SetActive(true);
+            directionalLight.SetActive(false);
+            endGameText.SetActive(false);
+
         }
 
         void OnInteract(GameObject obj)
@@ -33,16 +39,14 @@ namespace AE
                 interactableObjects.SetLightCondition();
             }                   
         }
-
-        // ...
-
-        private async void OnPressurePlate()
+        async void OnPressurePlate()
         {
             audioController.PlayOpeningDoorSound();
-            await Task.Delay(8000); // Wait for 8 seconds
+            await Task.Delay(7000);
             door.SetActive(false);
             doorWall.SetActive(false);
             directionalLight.SetActive(true);
+            endGameText.SetActive(true);
         }
     }
 }

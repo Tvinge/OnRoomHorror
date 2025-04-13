@@ -10,38 +10,17 @@ public class ObjectMover : MonoBehaviour
     public float moveSpeed = 5f;
     public LayerMask interactableLayer;
 
-
-
-    private Transform selectedObject;
-    private Rigidbody selectedRigidbody;
-
-    void Start()
-    {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
-    }
+    Transform selectedObject;
+    Rigidbody selectedRigidbody;
 
     void Update()
     {
-        // Handle object selection
         if (Input.GetMouseButtonDown(0))
-        {
             SelectObject();
-        }
-
-        // Handle object movement
         if (selectedObject != null)
-        {
             MoveSelectedObject();
-        }
-
-        // Deselect object
         if (Input.GetMouseButtonUp(0))
-        {
             DeselectObject();
-        }
     }
 
     void SelectObject()
@@ -54,17 +33,11 @@ public class ObjectMover : MonoBehaviour
         {
             selectedObject = hit.transform;
             selectedRigidbody = selectedObject.GetComponent<Rigidbody>();
-
-            //if (selectedRigidbody != null)
-            //{
-            //    selectedRigidbody.isKinematic = true; // Disable physics while moving
-            //}
         }
     }
 
     void MoveSelectedObject()
     {
-        //Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
 
@@ -82,10 +55,8 @@ public class ObjectMover : MonoBehaviour
     {
         if (selectedRigidbody != null)
         {
-            //selectedRigidbody.isKinematic = false; // Re-enable physics
             selectedRigidbody = null;
         }
-
         selectedObject = null;
     }
 }

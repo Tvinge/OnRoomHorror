@@ -19,16 +19,8 @@ public class AudioController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] float footStepStartPoint = 0.5f;
 
-
-
-    private void Awake()
-    {
-        //input.Move += OnMove;
-
-    }
     private void Start()
     {
-        //playerFootSteps = playerController.GetComponent<AudioSource>(); 
         ambientAudio.Play();
     }
     private void Update()
@@ -53,16 +45,4 @@ public class AudioController : MonoBehaviour
         doorOpenAudioSource.PlayOneShot(doorOpenAudio);
     }
 
-
-    //void OnMove(Vector2 a) //needed to be called twice 2 work
-    //{
-    //    if (playerController.IsMoving && !playerFootSteps.isPlaying)
-    //    {
-    //        playerFootSteps.Play();
-    //    }
-    //    else if (playerFootSteps.isPlaying)
-    //    {
-    //        playerFootSteps.Stop();
-    //    }
-    //}
 }

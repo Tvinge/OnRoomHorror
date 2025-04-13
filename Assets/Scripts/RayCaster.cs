@@ -25,10 +25,10 @@ namespace AE
         [Header("Settings")]
         [SerializeField] float maxDistance = 100f;
         [SerializeField] float interactionDistance = 30f;
-        [SerializeField] string defaultSentence = "Press F to interact with the object";
         [SerializeField] string interactable = "Interactable";
         [SerializeField] string heavyObj = "heavyObj";
         [SerializeField] bool displayingPopUp = false;
+        [SerializeField] string defaultSentence = "Click LMB or drag to interact with the object";
 
         public bool IsLookingAtInteractable { get; private set; } = false;
 
@@ -41,6 +41,9 @@ namespace AE
         {
             input.Interact += OnInteract;
             objects = interactableObjects.InitializeObjects();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         private void Update()
         {
@@ -60,7 +63,7 @@ namespace AE
                 hitInfo: out RaycastHit hitInfo,
                 maxDistance: 100);
 
-            if (hitInfo.collider.CompareTag(interactable) == true)// || hitInfo.collider.CompareTag(heavyObj) == true)
+            if (hitInfo.collider.CompareTag(interactable) == true)
             {
                 hitObject = hitInfo.collider.gameObject;
                 displayingPopUp = true;

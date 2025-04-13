@@ -8,12 +8,11 @@ public class PressurePlate : MonoBehaviour
 {
     public UnityAction OnPressurePlate = delegate { };
     [Header("References")]
-    [SerializeField, Self] SphereCollider sphereCollider;
     [SerializeField, Anywhere] InteractableObjects interactableObjects;
     [SerializeField, Anywhere] RayCaster rayCaster;
 
     [Header("Settings")]
-    [SerializeField] float rayDistance = 0f;
+    [SerializeField] float radius = 3f;
     [SerializeField] LayerMask heavyObjectsLayer;
 
     InteractableObjects.ObjectData[] heavyObjects;
@@ -35,7 +34,7 @@ public class PressurePlate : MonoBehaviour
     void Checker()
     {
         heavyObjectsCount = 0;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius, heavyObjectsLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, heavyObjectsLayer);
 
         foreach (var heavyObject in heavyObjects)
         {

@@ -15,7 +15,7 @@ namespace AE
         [SerializeField, Anywhere] CinemachineCamera freeLookVCam;
         [SerializeField, Anywhere] InputReader input;
         [SerializeField, Anywhere] RayCaster rayCaster;
-        //s
+
         [Header("Settings")]
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float rotationSpeed = 15f;
@@ -24,16 +24,15 @@ namespace AE
         [SerializeField] public bool hasLight = false;
 
         const float ZeroF = 0f;
-
         float currentSpeed;
         float velocity;
 
         public bool IsMoving => currentSpeed > minMovementSpeedDetection;
 
         Transform mainCamera;
+
         private void Awake()
         {
-            
             mainCamera = Camera.main.transform;
             freeLookVCam.Follow = transform;
             freeLookVCam.LookAt = transform;
@@ -53,7 +52,7 @@ namespace AE
 
         void HandleGravity()
         {
-            if (!groundChecker.IsGrounded && Time.time > 5) //bandaid to make sure that the collider on the player loads before the ground checker
+            if (!groundChecker.IsGrounded && Time.time > 1) //bandaid to make sure that the collider on the player loads before the ground checker
                 transform.position += Vector3.up * Physics.gravity.y * Time.deltaTime;
         }
 
